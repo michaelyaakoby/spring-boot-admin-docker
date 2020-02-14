@@ -11,10 +11,9 @@
     <name>Spring Boot Admin in a Docker Container</name>
 
     <properties>
-        <spring-boot-admin.version>${env.SBA_VERSION}</spring-boot-admin.version>
+        <spring-boot-admin.version>2.2.2</spring-boot-admin.version>
         <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
-        <docker-image.version>${spring-boot-admin.version}.O</docker-image.version>
-        <finalName>${project.artifactId}-${docker-image.version}</finalName>
+        <docker-image.version>${spring-boot-admin.version}</docker-image.version>
     </properties>
 
     <dependencies>
