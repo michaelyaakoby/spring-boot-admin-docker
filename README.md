@@ -3,7 +3,7 @@ This repository is used for creating a docker image running Codecentric's spring
 Images of built by this project are published in https://hub.docker.com/r/michayaak/spring-boot-admin with the image version reflecting SBA's version.
 
 ## Prerequisites:
-* Java 8 (or newer) 
+* Java 11 (or newer) 
 * Maven
 
 ## Building a docker image with the Spring Boot Admin Application and pushing to hub.docker.com
