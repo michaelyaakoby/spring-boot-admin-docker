@@ -23,3 +23,31 @@ Note that If your application isn't running in a container and it binds to `loca
 
 ## SBA Versioning
 The tags of the images in this repository are the target SBA version, so running SBA version 2.0.0 you should use `michayaak/spring-boot-admin:2.0.0`.
+
+# Customizing Spring Boot Admin in a Container
+When running in a container, customizing Spring Boot Admin is done by putting the configuration files in a directory that is mounted as `/config` inside the container which is than read by Spring Boot.
+
+For example, to enable email notifications with a custom template, create a `config` directory on the docker host with the following `application.yml`:
+```yml
+spring:
+  boot:
+    admin:
+      notify:
+        mail:
+          enabled: true
+          additional-properties:
+            environment: Heaven
+          to: my@mail.com
+          template: file:config/email-notification-template.html
+.status}*'
+  mail:
+    host: mail.com
+```
+Next add to this directory a file `email-notification-template.html` with your custom template.
+
+Now start Spring Boot Admin using the following command:
+```shell script
+docker run --name sba --rm -p 8082:8082 -v $PWD/config:/config michayaak/spring-boot-admin
+```
+
+Spring Boot will read the `application.yml` and SBA will be configured accordingly. 
