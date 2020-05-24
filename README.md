@@ -15,7 +15,7 @@ mvn clean install dockerfile:build dockerfile:tag@tag-version dockerfile:push@pu
 
 # Running the Spring Boot Admin Container
 ```shell script
-docker run -p 8082:8082 michayaak/spring-boot-admin
+docker run -p 8080:8080 michayaak/spring-boot-admin
 ```
 
 Spring Boot applications should register with SBA using an IP address that can be accessed from the container.
@@ -47,7 +47,17 @@ Next add to this directory a file `email-notification-template.html` with your c
 
 Now start Spring Boot Admin using the following command:
 ```shell script
-docker run --name sba --rm -p 8082:8082 -v $PWD/config:/config michayaak/spring-boot-admin
+docker run --name sba --rm -p 8080:8080 -v $PWD/config:/config michayaak/spring-boot-admin
 ```
 
 Spring Boot will read the `application.yml` and SBA will be configured accordingly. 
+
+## Using Spring Boot Profiles
+Spring Boot profiles can be used to easily switch between configuration files stored in the `config` directory. 
+
+The settings of a profile need to be written to `config/application-<profile>.yml`, for example the settings of the profile `heaven` should be written to `config/application-heaven.yml`.
+
+To activate the profile, a `SPRING_PROFILES_ACTIVE` environment variable need to be defined with the profile's name, for example: 
+```shell script
+docker run --name sba --rm -p 8080:8080 --env SPRING_PROFILES_ACTIVE=heaven -v $PWD/config:/config michayaak/spring-boot-admin
+```
