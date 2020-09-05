@@ -16,3 +16,5 @@ management:
   endpoint:
     health:
       show-details: always
+  health:
+    probes.enabled: true # Enable k8s liveness and readiness probes, see https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
